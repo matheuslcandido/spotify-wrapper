@@ -10,7 +10,6 @@ global.fetch = require('node-fetch');
 import { search, searchAlbums, searchArtists, searchTracks, searchPlaylists } from '../src/main';
 
 describe('Spotify Wrapper', () => {
-
   describe('smoke tests', () => {
     it('should exist the search method', () => {
       expect(search).to.exist;
@@ -33,4 +32,27 @@ describe('Spotify Wrapper', () => {
     });
   });
 
+  describe('Generic Search', () => {
+    it('should call fetch function', () => {
+      const fetchStub = sinon.stub(global, 'fetch');
+      const artists = search();
+
+      expect(fetchStub).to.have.been.calledOnce;
+
+      fetchStub.restore();
+    });
+
+    it('should receive the correct url to fetch', () => {
+      const fetchStub = sinon.stub(global, 'fetch');
+      const artists = search('Incubus', 'artist');
+
+      expect(fetchStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Incubus&type=artist');
+
+      const albums = search('Incubus', 'album');
+
+      expect(fetchStub).to.have.been.calledWith('https://api.spotify.com/v1/search?q=Incubus&type=album')
+
+      fetchStub.restore();
+    });
+  });
 });
