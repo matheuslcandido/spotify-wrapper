@@ -78,4 +78,27 @@ describe('Album', () => {
         });
     });
   });
+
+  describe('getAlbumsTracks', () => {
+    it('should call fetch method', () => {
+      const tracks = getAlbumTracks();
+      expect(fetchStub).to.have.been.calledOnce;
+    });
+
+    it('should call with the correct URL', () => {
+      const tracks = getAlbumTracks('59jhRMBpmQKFKMija2A8PM');
+      expect(fetchStub).to.have.been.calledWith('https://api.spotify.com/v1/albums/59jhRMBpmQKFKMija2A8PM/tracks');
+
+      const tracks2 = getAlbumTracks('59jhRMBpmQKFKMija2A8PN');
+      expect(fetchStub).to.have.been.calledWith('https://api.spotify.com/v1/albums/59jhRMBpmQKFKMija2A8PN/tracks');
+    });
+
+    it('should return the JSON data from the promise', () => {
+      fetchStub.resolves({ body: 'json' });
+      getAlbumTracks('59jhRMBpmQKFKMija2A8PM')
+        .then(data => {
+          expect(data).to.be.eql({ body: 'json' });
+        });
+    });
+  });
 });

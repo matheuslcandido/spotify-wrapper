@@ -5,4 +5,5 @@ export const getAlbum = id =>
 export const getAlbums = ids =>
   fetch(`https://api.spotify.com/v1/albums/?ids=${ids}`);
 
-export const getAlbumTracks = () => {};
+export const getAlbumTracks = id =>
+  fetch(`https://api.spotify.com/v1/albums/${id}/tracks`);
