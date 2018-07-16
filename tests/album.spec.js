@@ -55,27 +55,4 @@ describe('Album', () => {
         });
     });
   });
-
-  describe('getAlbums', () => {
-    it('should call fetch method', () => {
-      const albums = getAlbums();
-      expect(fetchStub).to.have.been.calledOnce;
-    });
-
-    it('should call with the correct URL', () => {
-      const albums = getAlbums(['59jhRMBpmQKFKMija2A8PM', '59jhRMBpmQKFKMija2A8MN']);
-      expect(fetchStub).to.have.been.calledWith('https://api.spotify.com/v1/albums/?ids=59jhRMBpmQKFKMija2A8PM,59jhRMBpmQKFKMija2A8MN');
-
-      const albums2 = getAlbums(['59jhRMBpmQKFKMija2A8PN', '59jhRMBpmQKFKMija2A8MO']);
-      expect(fetchStub).to.have.been.calledWith('https://api.spotify.com/v1/albums/?ids=59jhRMBpmQKFKMija2A8PN,59jhRMBpmQKFKMija2A8MO');
-    });
-
-    it('should return the JSON data from the promise', () => {
-      fetchStub.resolves({ body: 'json' });
-      getAlbums(['59jhRMBpmQKFKMija2A8PM', '59jhRMBpmQKFKMija2A8MN'])
-        .then(data => {
-          expect(data).to.be.eql({ body: 'json' });
-        });
-    });
-  });
 });
