@@ -8,7 +8,6 @@ import { search, searchAlbums, searchArtists, searchTracks, searchPlaylists } fr
 
 describe('Spotify Wrapper', () => {
   let fetchStub;
-  let promise;
 
   beforeEach(() => {
     fetchStub = sinon.stub(global, 'fetch');
