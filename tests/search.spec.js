@@ -8,13 +8,14 @@ import { search, searchAlbums, searchArtists, searchTracks, searchPlaylists } fr
 
 describe('Search', () => {
   let fetchStub;
+  let promise;
 
-  beforeEach(() => {
+  beforeEach('', () => {
     fetchStub = sinon.stub(global, 'fetch');
-    fetchStub.resolves();
+    promise = fetchStub.resolves({ json: () => ({ search: 'name' }) });
   });
 
-  afterEach(() => {
+  afterEach('', () => {
     fetchStub.restore();
   });
 
@@ -62,11 +63,10 @@ describe('Search', () => {
     });
 
     it('should return the JSON data from the promise', () => {
-      fetchStub.resolves({ body: 'json' });
-      search('Incubus', 'artist')
-        .then(data => {
-          expect(data).to.be.eql({ body: 'json' });
-        });
+      const artist = search('Incubus', 'artist');
+      artist.then((data) => {
+        expect(data).to.be.eql({ search: 'name' });
+      });
     });
   });
 

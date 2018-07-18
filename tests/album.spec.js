@@ -12,7 +12,7 @@ describe('Album', () => {
 
   beforeEach('', () => {
     fetchStub = sinon.stub(global, 'fetch');
-    fetchStub.resolves();
+    promise = fetchStub.resolves({ json: () => ({ album: 'name' }) });
   });
 
   afterEach('', () => {
@@ -48,11 +48,10 @@ describe('Album', () => {
     });
 
     it('should return the JSON data from the promise', () => {
-      fetchStub.resolves({ body: 'json' });
-      getAlbum('59jhRMBpmQKFKMija2A8MN')
-        .then(data => {
-          expect(data).to.be.eql({ body: 'json' });
-        });
+      const album = getAlbum('4aawyAB9vmqN3uQ7FjRGTy');
+      album.then((data) => {
+        expect(data).to.be.eql({ album: 'name' });
+      });
     });
   });
 
@@ -71,11 +70,10 @@ describe('Album', () => {
     });
 
     it('should return the JSON data from the promise', () => {
-      fetchStub.resolves({ body: 'json' });
-      getAlbums(['59jhRMBpmQKFKMija2A8PM', '59jhRMBpmQKFKMija2A8MN'])
-        .then(data => {
-          expect(data).to.be.eql({ body: 'json' });
-        });
+      const albums = getAlbums(['59jhRMBpmQKFKMija2A8PM', '59jhRMBpmQKFKMija2A8MN']);
+      albums.then(data => {
+        expect(data).to.be.eql({ album: 'name'});
+      });
     });
   });
 
@@ -94,11 +92,10 @@ describe('Album', () => {
     });
 
     it('should return the JSON data from the promise', () => {
-      fetchStub.resolves({ body: 'json' });
-      getAlbumTracks('59jhRMBpmQKFKMija2A8PM')
-        .then(data => {
-          expect(data).to.be.eql({ body: 'json' });
-        });
+      const AlbumTracks = getAlbumTracks('59jhRMBpmQKFKMija2A8PM');
+      AlbumTracks.then(data => {
+        expect(data).to.be.eql({ album: 'name'});
+      });
     });
   });
 });
