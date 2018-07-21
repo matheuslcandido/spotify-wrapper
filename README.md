@@ -226,7 +226,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-| ![Matheus Cândido](https://avatars3.githubusercontent.com/u/31928732?s=400&u=ac346a2334bc050cf78b8a9d631660f02fbd29fc&v=4)|
+| ![Matheus Cândido](https://avatars3.githubusercontent.com/u/31928732?v=3&s=150)|
 |:---------------------:|
 |  [Matheus Cândido](https://github.com/matheuslcandido/)   |
 
