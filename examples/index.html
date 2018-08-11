@@ -10,13 +10,19 @@
 <script src="../dist/spotify-wrapper.umd.js"></script>
 
 <script>
-  const albums = spotifyWrapper.searchAlbums('Incubus');
+  const spotify = new SpotifyWrapper({
+    token: 'BQDtvX3sBFzpDXwmciyKns5Y5zbagETOrxC9XZDNEmwSFe4MM6LusfDepmsUP57RMisjGTKsb7MUWEbL1Pe2oYtWiWi11ZM5sR616nwqiuvbHyFb-TVa_aCUS_owjck_49e_c5QwbqRVY_emINn0n7uWKGELN6OR9mO5ROtCYJPc8ZUc',
+  });
+
+  const albums = spotify.search.albums('Incubus');
   const albumsEl = document.getElementById('albums');
 
   albums
     .then(data => {
+      console.log(data);
+
       markup = data.albums.items.map(item =>
-        `<img src='${item.images[0].url}' alt='${item.name}' />`
+      `<img src='${item.images[0].url}' alt='${item.name}' />`
     ).join('');
 
     albumsEl.innerHTML = markup;
